@@ -21,7 +21,7 @@ function updatePlayer() {
   // let player = document.querySelector(".player");
   let playButton = document.querySelector(".play-button");
   let playButtonIcon = playButton.children.item(0);
-  let songDisplay = document.querySelector(".player-song-display");
+  let songDisplay = document.querySelector(".song-info");
 
   if (isPlaying()) {
     playButtonIcon.classList.remove("bi-play");
@@ -72,10 +72,22 @@ function playSong(song) {
     updatePlayer();
   });
 
+  currentHowl.on("end", function() {
+    playRandomSong();
+  });
+
   // Clear listener after first call.
   currentHowl.once("load", function () {
     currentHowl.play();
   });
+}
+
+function playRandomSong() {
+  let tracks = document.querySelectorAll(".track");
+  let track = tracks[Math.floor(Math.random()*tracks.length)];
+
+  let song = new Song(track);
+  playSong(song);
 }
 
 function initApp() {
@@ -89,8 +101,12 @@ function initApp() {
     if (isPlaying()) {
       currentHowl.stop();
     } else {
-      alert("not implemented");
+      playRandomSong();
     }
+  });
+
+  document.querySelector(".shuffle-button").addEventListener("click", function(event){
+    playRandomSong()
   });
 
   updatePlayer();
