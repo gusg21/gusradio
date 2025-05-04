@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     songs = query_db("SELECT * FROM songs")
-    return render_template("index.html", app_data=app_data, songs=songs)
+    return render_template("index.html", songs=songs)
 
 def init_db():
     with app.app_context():
