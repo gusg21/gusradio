@@ -1,3 +1,4 @@
 *.pyc
 venv/
 songs.db
+static/audio/
