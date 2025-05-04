@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron">
+    <div class="container player p-4 rounded">
+        <div class="row">
+            <div class="col col-auto">
+                <button href="/" class="play-button btn btn-primary fs-5"><i class="bi bi-play"></i></button>
+            </div>
+            <div class="col align-middle h-100 player-song-display">
+                Example Song - Angus Goucher
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Path</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for song in songs %}
+            <tr class="track" data-name="{{ song.name }}">
+                <td>
+                    {{ song.name }}
+                </td>
+                <td class="text-muted">
+                    {{ song.artist }}
+                </td>
+                <td class="text-muted">
+                    {{ song.filepath }}
+                </td>
+                <td>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-success play-track-btn" data-filepath="{{ song.filepath }}"
+                            data-name="{{ song.name }}" data-artist="{{ song.artist }}">Play</button>
+                        <button type="button" class="btn btn-secondary">Edit</button>
+                        <a class="btn btn-outline-secondary" href="{{ url_for('static',filename='audio/' + song.filepath) }}">Download</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="/">Music and Noise</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://serverdoesnt.works/">Angus Goucher</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-NonCommercial 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+</div>
+{% endblock %}
